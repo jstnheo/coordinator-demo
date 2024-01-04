@@ -18,12 +18,12 @@ struct SettingsFlowCoordinatorView: View {
     var body: some View {
         
         NavigationStack(path: $coordinator.path) {
-            coordinator.build(settingsFlow: .main)
+            coordinator.build(settingsFlow: .settings)
                 .navigationDestination(for: SettingsFlow.self) { screen in
                     coordinator.build(settingsFlow: screen)
                 }
                 .sheet(item: $coordinator.profileFlowCoordinator) { coordinator in
-                    ProfileFlowCoordinatorView(coordinator: coordinator)
+                    coordinator.build(profileFlow: .profile)
                 }
         }
         

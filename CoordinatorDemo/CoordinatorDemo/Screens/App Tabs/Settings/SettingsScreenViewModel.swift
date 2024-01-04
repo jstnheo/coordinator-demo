@@ -27,8 +27,8 @@ final class SettingsScreenViewModel: ObservableObject {
     }
     
     func didTapRandomArticle() {
-//        let randomNumber = generateRandomNumberString(count: 7)
-//        articleScreenPublisher.send(randomNumber)
+        let randomNumber = generateRandomNumberString(count: 7)
+        articleScreenPublisher.send(randomNumber)
     }
     
     func didTapDetails() {

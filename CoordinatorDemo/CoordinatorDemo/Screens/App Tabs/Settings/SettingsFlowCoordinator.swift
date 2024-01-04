@@ -10,7 +10,7 @@ import Combine
 
 // Enum to identify Settings flow screen Types
 enum SettingsFlow: Hashable {
-    case main
+    case settings
     case article(String)
     case detail
     case profile
@@ -47,12 +47,12 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
     @ViewBuilder
     func build(settingsFlow: SettingsFlow) -> some View {
         switch settingsFlow {
-        case .main:
+        case .settings:
             mainSettingsView()
         case .article(let id):
             buildArticleScreen(id: id)
         case .detail:
-            mainSettingsView()
+            buildDetailsScreen()
         case .profile:
             mainSettingsView()
         }
@@ -60,7 +60,7 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
     
     // MARK: Child Coordinator Methods
     
-    private func presentProfileFlowCoordiantor() {
+    private func presentProfileFlowCoordinator() {
         let profileFlowCoordinator = ProfileFlowCoordinator(articleService: articleService)
         profileFlowCoordinator.closeButtonPublisher.sink { [weak self] in
             self?.profileFlowCoordinator = nil
@@ -76,7 +76,7 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
         
         viewModel.profileScreenPublisher
             .sink { [weak self] _ in
-                self?.presentProfileFlowCoordiantor()
+                self?.presentProfileFlowCoordinator()
             }.store(in: &subscriptions)
         
         viewModel.articleScreenPublisher

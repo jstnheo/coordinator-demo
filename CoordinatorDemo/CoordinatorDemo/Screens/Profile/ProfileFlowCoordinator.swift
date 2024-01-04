@@ -10,7 +10,7 @@ import Combine
 
 // Enum to identify Settings flow screen Types
 enum ProfileFlow: Hashable {
-    case main
+    case profile
     case article(String)
 }
 
@@ -47,8 +47,8 @@ final class ProfileFlowCoordinator: ObservableObject, Identifiable {
     @ViewBuilder
     func build(profileFlow: ProfileFlow) -> some View {
         switch profileFlow {
-        case .main:
-            mainProfileView()
+        case .profile:
+            profileView()
         case .article(let id):
             buildArticleScreen(id: id)
         }
@@ -56,7 +56,7 @@ final class ProfileFlowCoordinator: ObservableObject, Identifiable {
     
     // MARK: View Creation Methods
     
-    private func mainProfileView() -> some View {
+    private func profileView() -> some View {
         let viewModel = ProfileViewModel()
         
         viewModel.articleScreenPublisher

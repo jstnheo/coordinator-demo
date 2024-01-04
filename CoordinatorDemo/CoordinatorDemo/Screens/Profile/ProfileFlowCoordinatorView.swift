@@ -16,7 +16,7 @@ struct ProfileFlowCoordinatorView: View {
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            coordinator.build(profileFlow: .main)
+            coordinator.build(profileFlow: .profile)
                 .navigationDestination(for: ProfileFlow.self) { screen in
                     coordinator.build(profileFlow: screen)
                 }
