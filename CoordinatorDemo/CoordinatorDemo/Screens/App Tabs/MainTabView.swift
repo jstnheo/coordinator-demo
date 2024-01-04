@@ -9,9 +9,15 @@ import SwiftUI
 
 struct MainTabView: View {
     
-    private let homeFlowCoordinator = HomeFlowCoordinator()
-    private let liveFlowCoordinator = LiveFlowCoordinator()
-    private let settingsFlowCoordinator = SettingsFlowCoordinator()
+    private let homeFlowCoordinator: HomeFlowCoordinator
+    private let liveFlowCoordinator: LiveFlowCoordinator
+    private let settingsFlowCoordinator: SettingsFlowCoordinator
+    
+    init(articleService: ArticleService) {
+        self.homeFlowCoordinator = HomeFlowCoordinator(articleService: articleService)
+        self.liveFlowCoordinator = LiveFlowCoordinator()
+        self.settingsFlowCoordinator = SettingsFlowCoordinator(articleService: articleService)
+    }
     
     var body: some View {
         

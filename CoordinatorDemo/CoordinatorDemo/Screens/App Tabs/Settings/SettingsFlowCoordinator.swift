@@ -27,7 +27,7 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
         
     private var articleService: ArticleService
     
-    init(articleService: ArticleService = ArticleService()) {
+    init(articleService: ArticleService) {
         self.articleService = articleService
     }
 
@@ -61,7 +61,7 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
     // MARK: Child Coordinator Methods
     
     private func presentProfileFlowCoordiantor() {
-        let profileFlowCoordinator = ProfileFlowCoordinator()
+        let profileFlowCoordinator = ProfileFlowCoordinator(articleService: articleService)
         profileFlowCoordinator.closeButtonPublisher.sink { [weak self] in
             self?.profileFlowCoordinator = nil
         }

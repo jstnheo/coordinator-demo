@@ -10,9 +10,11 @@ import SwiftUI
 @main
 struct CoordinatorDemoApp: App {
     
+    let articleService = ArticleService()
+    
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            MainTabView(articleService: articleService)
         }
     }
     

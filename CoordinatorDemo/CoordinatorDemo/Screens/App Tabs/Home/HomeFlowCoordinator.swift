@@ -24,7 +24,7 @@ final class HomeFlowCoordinator: ObservableObject, Identifiable {
     
     private var articleService: ArticleService
         
-    init(articleService: ArticleService = ArticleService()) {
+    init(articleService: ArticleService) {
         self.articleService = articleService
     }
     
