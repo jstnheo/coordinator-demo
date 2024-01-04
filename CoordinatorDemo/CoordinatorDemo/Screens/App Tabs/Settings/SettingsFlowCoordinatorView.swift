@@ -22,9 +22,12 @@ struct SettingsFlowCoordinatorView: View {
                 .navigationDestination(for: SettingsFlow.self) { screen in
                     coordinator.build(settingsFlow: screen)
                 }
-                .sheet(item: $coordinator.profileFlowCoordinator) { coordinator in
-                    coordinator.build(profileFlow: .profile)
-                }
+             
+        }
+        .sheet(item: $coordinator.profileFlowCoordinator) { profileCoordinator in
+            
+            ProfileFlowCoordinatorView(coordinator: profileCoordinator)
+            
         }
         
     }

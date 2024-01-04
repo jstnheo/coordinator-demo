@@ -64,9 +64,7 @@ final class ProfileFlowCoordinator: ObservableObject, Identifiable {
                 self?.push(.article(articleId))
             }.store(in: &subscriptions)
         
-        let view = ProfileScreen(viewModel: viewModel)
-        
-        return view
+        return  ProfileScreen(viewModel: viewModel)
     }
     
     private func buildArticleScreen(id: String) -> some View {

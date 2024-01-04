@@ -13,7 +13,6 @@ enum SettingsFlow: Hashable {
     case settings
     case article(String)
     case detail
-    case profile
 }
 
 final class SettingsFlowCoordinator: ObservableObject, Identifiable {
@@ -22,7 +21,7 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
     
     // Child Coordinator
     @Published var profileFlowCoordinator: ProfileFlowCoordinator?
-
+    
     var subscriptions = Set<AnyCancellable>()
         
     private var articleService: ArticleService
@@ -42,19 +41,16 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
     func popToRoot() {
         path.removeLast(path.count)
     }
-
     
     @ViewBuilder
     func build(settingsFlow: SettingsFlow) -> some View {
         switch settingsFlow {
         case .settings:
-            mainSettingsView()
+            buildSettingsView()
         case .article(let id):
             buildArticleScreen(id: id)
         case .detail:
             buildDetailsScreen()
-        case .profile:
-            mainSettingsView()
         }
     }
     
@@ -71,7 +67,7 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
     
     // MARK: View Creation Methods
     
-    private func mainSettingsView() -> some View {
+    private func buildSettingsView() -> some View {
         let viewModel = SettingsScreenViewModel()
         
         viewModel.profileScreenPublisher
@@ -86,12 +82,10 @@ final class SettingsFlowCoordinator: ObservableObject, Identifiable {
         
         viewModel.detailsScreenPublisher
             .sink { [weak self] detailsText in
-                print(detailsText)
                 self?.push(.detail)
             }.store(in: &subscriptions)
         
-        let view = SettingsScreen(viewModel: viewModel)
-        return view
+        return SettingsScreen(viewModel: viewModel)
     }
     
     private func buildArticleScreen(id: String) -> some View {
